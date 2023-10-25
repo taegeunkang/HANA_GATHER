@@ -82,9 +82,9 @@
 
 <table>
   <tr>
-    <th style="width: 100px;">항목</th>
-    <th>내용</th>
-    <th>&nbsp;</th>
+    <th style="width: 10%;">항목</th>
+    <th style="width: 45%;">내용</th>
+    <th style="width: 45%;">&nbsp;</th>
   </tr>
   <tr>
     <td>이름</td>
