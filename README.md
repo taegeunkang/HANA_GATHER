@@ -2,6 +2,8 @@
 
 ## 프로젝트 개요
 
+&nbsp;
+
 ### 프로젝트 배경
 
 <img src="./readme자료/002.png" width="800px;"/>
@@ -9,11 +11,17 @@
 모 기관에서 더치페이에 관한 조사를 진행한 결과 더치페이를 한다는 응답이 90.1%에 달하였고 대표자 한 명이 결제하고 후에 계산한다고 하는 응답이 전체의 절반 이상을 차지하는 것을 볼 수 있습니다.
 또한 스터디, 모임과 같은 단체에서 일정을 잡거나 회비 관리를 기존의 메신저 서비스에서 하는 데 한계가 있다고 생각하여 다수에게 이체를 요청해야 하는 어려움과 모임의 일정, 회비 관리의 불편함을 해소하기 위한 서비스가 필요하다고 생각하여 하나모여 서비스를 개발하게 되었습니다.
 
+&nbsp;
+
 ### 프로젝트 목적
 
 - 더치페이와 그룹 커뮤니티 기능뿐만 아니라 일정을 관리하고 회비를 결제할 수 있는 통합 서비스를 개발하여 사용자의 편의성 증대
 
+&nbsp;
+
 ## 프로젝트 발표 자료
+
+&nbsp;
 
 ### 발표 PPT
 
@@ -22,9 +30,13 @@
 [발표자료](./readme자료/하나모여_강태근.pptx)
 
 
+&nbsp;
+
 ### 시연 동영상
 
-<a href="https://youtu.be/NlqxPvKvgVI" target="_blank">시연 동영상</a>
+[![시연_동영상](https://img.youtube.com/vi/NlqxPvKvgVI/0.jpg)](https://youtu.be/NlqxPvKvgVI)
+
+&nbsp;
 
 ### 수행 기간
 
@@ -32,9 +44,13 @@
 
 <img src="./readme자료/016.png" width="800px;"/>
 
+&nbsp;
+
 ### 주요 기능
 
 <img src="./readme자료/006.png" width="800px;"/>
+
+&nbsp;
 
 ### 사용기술
 
@@ -45,6 +61,8 @@
 - 도메인 등록과 SSL 인증서 적용 (https://dev-dean.com)
 - Nginx의 로드밸런싱 기능을 사용하여 트래픽 분산
 
+&nbsp;
+
 ### 개발환경
 - OS : Max OS X 13.4.1, Ubuntu 20.04 LTS
 - Framework: Spring Boot 2.7.14, React Native 0.72.1, MyBatis 3.5.6
@@ -54,12 +72,19 @@
 - Tool : IntelliJ, Eclipse, VS Code, SQL Developer, Data Grip, Xcode
 - DB : Oracle 19c
 
+&nbsp;
+
 
 ### 시스템 아키텍처
 <img src="./readme자료/009.png" width="800px;"/>
 
+&nbsp;
+
 ### ERD
 <img src="./readme자료/015.png" width="800px;"/>
+
+&nbsp;
+
 
 <table>
   <tr>
