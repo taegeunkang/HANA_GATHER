@@ -17,32 +17,11 @@
 
 &nbsp;
 
-## 프로젝트 발표 자료
-
-&nbsp;
-
-### 발표 PPT
-
-<img src="./readme자료/001.png" width="800px;"/>
-
-[발표자료](./readme자료/하나모여_강태근.pptx)
-
-
-&nbsp;
-
-### 시연 동영상
-
-[![시연_동영상](https://img.youtube.com/vi/NlqxPvKvgVI/0.jpg)](https://youtu.be/NlqxPvKvgVI)
-
-&nbsp;
-
-### 수행 기간
-
-2023.09.01 ~ 2023.10.20
+### 프로젝트 수행 일정
 
 <img src="./readme자료/016.png" width="800px;"/>
 
-&nbsp;
+## 프로젝트 구성
 
 ### 주요 기능
 
@@ -80,6 +59,24 @@
 
 ### ERD
 <img src="./readme자료/015.png" width="800px;"/>
+
+&nbsp;
+
+
+## 프로젝트 발표 자료
+### 발표 PPT
+
+<img src="./readme자료/001.png" width="800px;"/>
+
+[발표자료](./readme자료/하나모여_강태근.pptx)
+
+
+&nbsp;
+
+### 시연 동영상
+
+[![시연_동영상](https://img.youtube.com/vi/NlqxPvKvgVI/0.jpg)](https://youtu.be/NlqxPvKvgVI)
+
 
 &nbsp;
 
