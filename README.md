@@ -2,8 +2,6 @@
 
 ## 프로젝트 개요
 
-&nbsp;
-
 ### 프로젝트 배경
 
 <img src="./readme자료/002.png" width="800px;"/>
