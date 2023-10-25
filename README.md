@@ -41,6 +41,7 @@
 &nbsp;
 
 ### 개발환경
+
 - OS : Max OS X 13.4.1, Ubuntu 20.04 LTS
 - Framework: Spring Boot 2.7.14, React Native 0.72.1, MyBatis 3.5.6
 - Web Server : Nginx 1.18.0
@@ -51,25 +52,25 @@
 
 &nbsp;
 
-
 ### 시스템 아키텍처
+
 <img src="./readme자료/009.png" width="800px;"/>
 
 &nbsp;
 
 ### ERD
+
 <img src="./readme자료/015.png" width="800px;"/>
 
 &nbsp;
 
-
 ## 프로젝트 발표 자료
+
 ### 발표 PPT
 
 <img src="./readme자료/001.png" width="800px;"/>
 
 [발표자료](./readme자료/하나모여_강태근.pptx)
-
 
 &nbsp;
 
@@ -77,13 +78,11 @@
 
 [![시연_동영상](https://img.youtube.com/vi/NlqxPvKvgVI/0.jpg)](https://youtu.be/NlqxPvKvgVI)
 
-
 &nbsp;
-
 
 <table>
   <tr>
-    <th>항목</th>
+    <th style="width: 100px;">항목</th>
     <th>내용</th>
     <th>&nbsp;</th>
   </tr>
