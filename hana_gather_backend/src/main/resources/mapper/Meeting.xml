@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.core.repository.MeetingRepository">
+
+    <resultMap id="meetingResultMap" type="Meeting">
+        <result column="meeting_day" property="meetingDay" />
+        <result column="band_id" property="bandId" />
+        <result column="location_name" property="locationName" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+
+    <insert id="save" parameterType="Meeting" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into meeting(meeting_day, amount, band_id, location_name, latitude, longitude,created_date, modified_date) values (#{meetingDay}, #{amount}, #{bandId}, #{locationName},#{latitude}, #{longitude},#{createdDate}, #{modifiedDate})
+    </insert>
+
+
+    <select id="findFirstBandId" resultMap="meetingResultMap">
+        select * from (select id, meeting_day, amount,band_id, location_name,latitude, longitude, created_date, modified_date from meeting where band_id = #{bandId} order by created_date desc) where rownum = 1
+    </select>
+
+    <select id="findById" resultMap="meetingResultMap">
+        select id, meeting_day, amount, band_id, location_name,latitude, longitude,created_date, modified_date from meeting where id = #{id}
+    </select>
+
+
+    <select id="findByMeetingMemberMemberId" resultMap="meetingResultMap">
+        select m.id, m.meeting_day, m.amount, m.band_id, m.location_name,m.latitude, m.longitude, m.created_date, m.modified_date from meeting m join meeting_member r on m.id = r.meeting_id where r.member_id = #{memberId} order by m.created_date desc offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+    <select id="findByMeetingMemberMemberIdAndBandMemberStatus" resultMap="meetingResultMap">
+        select m.id, m.meeting_day, m.amount, m.band_id, m.location_name,m.latitude, m.longitude, m.created_date, m.modified_date from meeting m join band_member b on m.band_id = b.band_id and b.member_id = #{memberId} and b.invitation_status = #{invitationStatus} order by m.meeting_day asc offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+
+    <select id="findMeetingDayByBandId" resultType="java.time.LocalDateTime">
+        select meeting_day from meeting where band_id = #{bandId}
+    </select>
+
+    <select id="findByBandIdMeetingDayBeforeNow" resultMap="meetingResultMap">
+        select id, meeting_day, amount, band_id, location_name,latitude, longitude, created_date, modified_date from meeting where band_id = #{bandId} and sysdate > meeting_day  order by created_date desc offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+    <select id="findAllByBandIdMeetingDayAfterNow" resultMap="meetingResultMap">
+        select id, meeting_day, amount, band_id, location_name,latitude, longitude, created_date, modified_date from meeting where band_id = #{bandId} and meeting_day > sysdate order by created_date
+    </select>
+
+    <select id="findAllByBandIdMeetingDayAfterNowPage" resultMap="meetingResultMap">
+        select id, meeting_day, amount, band_id, location_name,latitude, longitude, created_date, modified_date from meeting where band_id = #{bandId} and meeting_day > sysdate order by created_date desc offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+    <select id="findAllByBandIdMeetingDayBeforeNow" resultMap="meetingResultMap">
+        select id, meeting_day, amount, band_id, location_name,latitude, longitude, created_date, modified_date from meeting where band_id = #{bandId} and sysdate > meeting_day  order by created_date desc
+    </select>
+
+
+</mapper>

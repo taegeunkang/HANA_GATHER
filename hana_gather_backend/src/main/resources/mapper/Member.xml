@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.user.repository.MemberRepository">
+
+    <resultMap id="memberResultMap" type="Member">
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+    <select id="findMemberByEmail" resultMap="memberResultMap">
+       select email, password, created_date, modified_date from member where email = #{email}
+    </select>
+
+    <insert id="save">
+        insert into member(email, password, created_date, modified_date) values (#{email}, #{password}, #{createdDate}, #{modifiedDate})
+    </insert>
+</mapper>

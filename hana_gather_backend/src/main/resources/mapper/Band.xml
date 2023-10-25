@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.core.repository.BandRepository">
+
+    <resultMap id="bandResultMap" type="Band">
+        <result column="id" property="id" />
+        <result column="virtual_account_number" property="virtualAccountNumber" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+
+    <insert id="save" parameterType="Band" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into band(title, category, thumbnail, virtual_account_number,owner,created_date, modified_date) values (#{title}, #{category}, #{thumbnail}, #{virtualAccountNumber}, #{owner}, #{createdDate}, #{modifiedDate})
+    </insert>
+    <select id="findById" resultMap="bandResultMap">
+        select id, title, category, thumbnail, virtual_account_number,owner,created_date, modified_date from band where id = #{id}
+    </select>
+
+    <select id="findByTitleContaining" resultMap="bandResultMap">
+        select id, title, category, thumbnail, virtual_account_number,owner,created_date, modified_date from band where title like '%' ||#{word}||'%' order by title offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+    <select id="findFirstByOwner" resultMap="bandResultMap">
+        select * from (select id, title, category, thumbnail, virtual_account_number,owner,created_date, modified_date from band where owner = #{owner} order by created_date desc) where rownum = 1
+    </select>
+
+    <select id="findAllByBandMemberMemberId" resultMap="bandResultMap">
+        select id, title, category, thumbnail, virtual_account_number,owner,created_date, modified_date from band where id in (select band_id from band_member where member_id = #{memberId}) order by created_date desc offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+    <select id="findByBandMemberMemberIdInvitationStatus" resultMap="bandResultMap">
+        select id, title, category, thumbnail, virtual_account_number,owner,created_date, modified_date from band where id in (select band_id from band_member where member_id = #{memberId} and invitation_status = #{invitationStatus}) order by created_date desc offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+
+</mapper>

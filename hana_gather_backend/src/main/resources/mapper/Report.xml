@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.user.repository.ReportRepository">
+
+    <resultMap id="reportResultMap" type="Report">
+        <result column="report_type" property="reportType" />
+        <result column="member_id" property="memberId" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+
+    <insert id="save" parameterType="Report" useGeneratedKeys="true" keyColumn="id"  keyProperty="id">
+        insert into report(report_type, message, member_id, created_date, modified_date) values (#{reportType}, #{message}, #{memberId}, #{createdDate}, #{modifiedDate})
+    </insert>
+
+    <select id="findAllOrderByCreatedDateDesc" resultMap="reportResultMap">
+        select id, report_type, message, member_id, created_date, modified_date from report order by created_date desc
+    </select>
+
+    <delete id="deleteById">
+        delete from report where id = ${id}
+    </delete>
+
+
+</mapper>

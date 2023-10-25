@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.core.repository.MeetingMemberRepository">
+
+    <resultMap id="meetingMemberResultMap" type="MeetingMember">
+        <result column="meeting_id" property="meetingId" />
+        <result column="member_id" property="memberId" />
+        <result column="payed_amount" property="payedAmount" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+
+    <insert id="save" parameterType="MeetingMember">
+        insert into meeting_member(meeting_id, member_id, payed_amount,created_date, modified_date) values (#{meetingId}, #{memberId}, #{payedAmount}, #{createdDate}, #{modifiedDate})
+    </insert>
+
+    <select id="findByMeetingId" resultMap="meetingMemberResultMap">
+        select meeting_id, member_id, payed_amount, created_date, modified_date from meeting_member where meeting_id = #{meetingId}
+    </select>
+
+    <update id="updatePayedAmountByMeetingIdAndMemberId">
+        update meeting_member set payed_amount = #{payedAmount} where meeting_id = #{meetingId} and member_id = #{memberId}
+    </update>
+
+
+</mapper>

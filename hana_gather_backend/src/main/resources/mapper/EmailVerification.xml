@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.email.repository.EmailVerificationRepository">
+
+    <resultMap id="emailVerificationResultMap" type="EmailVerification">
+        <result column="verification_key" property="verificationKey" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+    <select id="findEmailVerificationByEmail" resultMap="emailVerificationResultMap">
+        select email, verification_key, expired_date, verified, created_date, modified_date from email_verification where email = #{email}
+    </select>
+
+    <delete id="deleteByEmail">
+        delete from email_verification where email = #{email}
+    </delete>
+
+    <insert id="save">
+        insert into email_verification(email, verification_key, expired_date, verified,created_date, modified_date) values (#{email}, #{verificationKey}, #{expiredDate}, #{verified}, #{createdDate}, #{modifiedDate})
+    </insert>
+
+    <update id="updateEmailVerificationByEmail">
+        update email_verification set verification_key = #{verificationKey}, expired_date = #{expiredDate}, modified_date = #{modifiedDate} where email = #{email}
+    </update>
+
+    <update id="updateEmailVerificationVerifiedByEmail">
+        update email_verification set verified = #{verified} where email = #{email}
+    </update>
+</mapper>

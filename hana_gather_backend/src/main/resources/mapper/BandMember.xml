@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.core.repository.BandMemberRepository">
+
+    <resultMap id="bandMemberResultMap" type="BandMember">
+        <result column="band_id" property="bandId" />
+        <result column="member_id" property="memberId" />
+        <result column="invitation_status" property="invitationStatus" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+
+    <insert id="save" parameterType="BandMember">
+        insert into band_member(band_id, member_id, invitation_status,created_date, modified_date) values (#{bandId}, #{memberId}, #{invitationStatus}, #{createdDate}, #{modifiedDate})
+    </insert>
+
+    <update id="updateInvitationStatusByBandIdAndMemberId" >
+        update band_member set invitation_status = #{invitationStatus} where member_id = #{memberId} and band_id = #{bandId}
+    </update>
+
+    <select id="findAllByBandId" resultMap="bandMemberResultMap">
+        select band_id, member_id, invitation_status, created_date, modified_date from band_member where band_id = #{bandId}
+    </select>
+
+    <select id="findAllByBandIdAndMemberInfoNicknameContainingWordAndInvitationStatus" resultMap="bandMemberResultMap">
+        select b.band_id, b.member_id, b.invitation_status, b.created_date, b.modified_date from band_member b join member_info m on b.member_id = m.member_id where b.band_id = #{bandId} and m.nickname like '%' ||#{word}||'%' and b.invitation_status = #{invitationStatus} order by m.nickname offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+</mapper>

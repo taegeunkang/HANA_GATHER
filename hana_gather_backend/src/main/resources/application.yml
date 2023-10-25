@@ -1,0 +1,48 @@
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+  datasource:
+    url: jdbc:oracle:thin:@//49.247.25.122:1521/dink02
+    username: user02
+    password: user02
+    driver-class-name: oracle.jdbc.OracleDriver
+  mail:
+    default-encoding: utf-8
+    host: smtp.gmail.com
+    port: 587
+    username: "deankang0918@gmail.com"
+    password: "qjlk vrcz csqn jpcv"
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+
+mybatis:
+  type-aliases-package: com.kopo.hanaGatherBackend.user.entity, com.kopo.hanaGatherBackend.email.entity, com.kopo.hanaGatherBackend.mobile.entity, com.kopo.hanaGatherBackend.core.entity
+  mapper-locations: classpath*:mapper/*.xml, classpath*:test/mapper/*.xml
+  configuration:
+    jdbc-type-for-null: 'NULL'
+
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id:
+#            client-secret:
+#            scope:
+#              - email
+server:
+  servlet:
+    jsp:
+      init-parameters:
+        development: true
+  error:
+    whitelabel:
+      enabled: false
+    path: /error
+

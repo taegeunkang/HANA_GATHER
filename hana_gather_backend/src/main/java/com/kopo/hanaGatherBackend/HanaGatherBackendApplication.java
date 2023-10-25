@@ -1,0 +1,15 @@
+package com.kopo.hanaGatherBackend;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+@EnableScheduling
+@SpringBootApplication
+public class HanaGatherBackendApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(HanaGatherBackendApplication.class, args);
+	}
+
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.core.repository.DutchPayRepository">
+
+    <resultMap id="dutchPayResultMap" type="DutchPay">
+        <result column="member_id" property="memberId" />
+        <result column="total_amount" property="totalAmount" />
+        <result column="amount_per_person" property="amountPerPerson" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+
+    <insert id="save" parameterType="DutchPay">
+        insert into dutch_pay (member_id, total_amount, amount_per_person, virtual_account_number, created_date, modified_date) values (#{memberId}, #{totalAmount}, #{amountPerPerson},#{virtualAccountNumber}, #{createdDate}, #{modifiedDate})
+    </insert>
+
+    <select id="findById" resultMap="dutchPayResultMap">
+        select id, member_id, total_amount, amount_per_person, virtual_account_number,created_date, modified_date from dutch_pay where id = #{id}
+    </select>
+
+    <select id="findFirstByMemberId" resultMap="dutchPayResultMap">
+        select * from (select id, member_id, total_amount, amount_per_person, virtual_account_number,created_date, modified_date from dutch_pay where member_id = #{memberId} order by created_date desc) where rownum = 1
+    </select>
+
+    <select id="findAllByMemberId" resultMap="dutchPayResultMap">
+        select id, member_id, total_amount, amount_per_person, virtual_account_number, created_date, modified_date from dutch_pay where id in (select dutch_pay_id from dutch_pay_member where member_id = #{memberId}) order by created_date desc offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+    <select id="findAllByMemberIdAndAllMemberNotPayed" resultMap="dutchPayResultMap">
+        select d.id, d.member_id, d.total_amount, d.amount_per_person, d.virtual_account_number, d.created_date, d.modified_date from dutch_pay d join (select dutch_pay_id, sum(payed_amount) as total_payed from dutch_pay_member group by dutch_pay_id) s on d.id = s.dutch_pay_id and d.total_amount != s.total_payed where d.member_id = #{memberId} order by d.created_date desc offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+</mapper>

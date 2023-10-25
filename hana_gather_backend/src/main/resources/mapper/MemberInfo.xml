@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kopo.hanaGatherBackend.user.repository.MemberInfoRepository">
+
+    <resultMap id="memberInfoResultMap" type="MemberInfo">
+        <result column="member_id" property="memberId" />
+        <result column="account_id" property="accountId" />
+        <result column="profile_image" property="profileImage" />
+        <result column="notification_token" property="notificationToken"/>
+        <result column="is_admin" property="isAdmin"/>
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+    <select id="findMemberInfoByNickname" resultMap="memberInfoResultMap">
+        select member_id, nickname, account_id, profile_image,notification_token, is_admin, created_date, modified_date from member_info where nickname = #{nickname}
+    </select>
+
+    <select id="findMemberInfoByMemberId" resultMap="memberInfoResultMap">
+        select member_id, nickname, account_id, profile_image,notification_token, is_admin, created_date, modified_date from member_info where member_id = #{memberId}
+    </select>
+
+    <insert id="save">
+        insert into member_info(member_id, nickname, profile_image,notification_token, created_date, modified_date) values (#{memberId}, #{nickname} ,#{profileImage},#{notificationToken}, #{createdDate}, #{modifiedDate})
+    </insert>
+
+    <update id="updateAccountIdByMemberId">
+        update member_info set account_id = #{accountId} where member_id = #{memberId}
+    </update>
+
+
+    <select id="findByMemberIdContainingWord" resultMap="memberInfoResultMap">
+        select member_id, nickname, account_id, profile_image,notification_token, is_admin, created_date, modified_date from member_info where nickname like '%' ||#{word}||'%' order by nickname offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+    <select id="findByAccountId" resultMap="memberInfoResultMap">
+        select member_id, nickname, account_id, profile_image,notification_token, is_admin,created_date, modified_date from member_info where account_id = #{accountNumber}
+    </select>
+
+    <select id="findByMeetingMemberMeetingId" resultMap="memberInfoResultMap">
+        select  m.member_id, m.nickname, m.account_id, m.profile_image, m.notification_token, m.is_admin, m.created_date, m.modified_date from member_info m join meeting_member mr on m.member_id = mr.member_id where mr.meeting_id = #{meetingId}
+    </select>
+
+    <update id="updateNotificationTokenByMemberId">
+        update member_info set notification_token = #{notificationToken} where member_id = #{memberId}
+    </update>
+</mapper>

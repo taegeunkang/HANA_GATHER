@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.core.repository.ReplyRepository">
+
+    <resultMap id="replyResultMap" type="Reply">
+        <result column="re_reply" property="reReply" />
+        <result column="post_id" property="postId" />
+        <result column="member_id" property="memberId" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+
+    <insert id="save" parameterType="Reply" useGeneratedKeys="true" keyColumn="id"  keyProperty="id">
+        insert into reply(content, re_reply, post_id, member_id, created_date, modified_date) values (#{content}, #{reReply}, #{postId}, #{memberId}, #{createdDate}, #{modifiedDate})
+    </insert>
+
+    <select id="countCommentByPostId" resultType="Long">
+        select count(*) from reply where post_id = #{postId}
+    </select>
+
+    <select id="findByPostIdAndReReplyIsNullOrderByCreatedDateAsc" resultMap="replyResultMap">
+        select id, content, re_reply, post_id, member_id, created_date, modified_date from reply where post_id = #{postId} and re_reply is null order by created_date asc offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+    <select id="findByPostIdAndReReplyOrderByCreatedDateAsc" resultMap="replyResultMap">
+        select id, content, re_reply, post_id, member_id, created_date, modified_date from reply where post_id = #{postId} and re_reply = #{reReply} order by created_date asc offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+    <select id="countCommentByReReply" resultType="Long">
+        select count(*) from reply where re_reply = #{reReply}
+    </select>
+
+
+
+
+</mapper>

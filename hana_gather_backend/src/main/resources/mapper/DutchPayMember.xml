@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.core.repository.DutchPayMemberRepository">
+
+    <resultMap id="dutchPayMemberResultMap" type="DutchPayMember">
+        <result column="dutch_pay_id" property="dutchPayId" />
+        <result column="member_id" property="memberId" />
+        <result column="payed_amount" property="payedAmount" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+
+    <insert id="save" parameterType="DutchPayMember">
+        insert into dutch_pay_member(dutch_pay_id, member_id, payed_amount, created_date, modified_date) values (#{dutchPayId},#{memberId},#{payedAmount},#{createdDate},#{modifiedDate})
+    </insert>
+
+    <select id="findByDutchPayId" resultMap="dutchPayMemberResultMap">
+        select d.dutch_pay_id, d.member_id, d.payed_amount, d.created_date, d.modified_date from dutch_pay_member d join member_info f on d.member_id = f.member_id  where dutch_pay_id = ${dutchPayId} order by f.nickname asc
+    </select>
+    <insert id="updatePayedAmountByDutchPayIdAndMemberId">
+        update dutch_pay_member set payed_amount = #{payedAmount} where dutch_pay_id = #{dutchPayId} and member_id = #{memberId}
+    </insert>
+
+</mapper>

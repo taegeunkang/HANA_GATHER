@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.core.repository.NotificationRepository">
+
+    <resultMap id="notificationResultMap" type="Notification">
+        <result column="member_id" property="memberId" />
+        <result column="dutch_pay_id" property="dutchPayId" />
+        <result column="band_id" property="bandId" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+    <insert id="save" parameterType="Notification">
+        insert into notification(message, member_id, profile_image,dutch_pay_id, band_id, invitation, created_date, modified_date) values (#{message}, #{memberId},#{profileImage}, #{dutchPayId}, #{bandId},#{invitation},#{createdDate}, #{modifiedDate})
+    </insert>
+
+    <select id="findByMemberId" resultMap="notificationResultMap">
+        select id, message, member_id, profile_image, dutch_pay_id,band_id, invitation,created_date, modified_date from notification where member_id = #{memberId} order by id desc offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+
+</mapper>

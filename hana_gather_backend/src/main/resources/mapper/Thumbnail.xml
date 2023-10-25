@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.core.repository.ThumbnailRepository">
+
+    <resultMap id="thumbnailResultMap" type="Thumbnail">
+        <result column="file_size" property="fileSize" />
+        <result column="media_id" property="mediaId" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+
+    <insert id="save" parameterType="Thumbnail" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into thumbnail(name, file_size, ext, media_id, created_date, modified_date) values (#{name}, #{fileSize}, #{ext}, #{mediaId}, #{createdDate}, #{modifiedDate})
+    </insert>
+    <select id="findByMediaId" resultMap="thumbnailResultMap">
+        select id, name, file_size, ext, media_id, created_date, modified_date from thumbnail where media_id = #{mediaId}
+    </select>
+
+
+</mapper>

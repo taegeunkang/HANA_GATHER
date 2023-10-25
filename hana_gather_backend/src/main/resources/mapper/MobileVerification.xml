@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.mobile.repository.MobileVerificationRepository">
+
+    <resultMap id="mobileVerificationResultMap" type="MobileVerification">
+        <result column="mobile_number" property="mobileNumber" />
+        <result column="verification_key" property="verificationKey" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+    <select id="findMobileVerificationByMobileNumber" resultMap="mobileVerificationResultMap">
+        select mobile_number, verification_key, expired_date, verified, created_date, modified_date from mobile_verification where mobile_number = #{mobileNumber}
+    </select>
+
+    <delete id="deleteByMobileNumber">
+        delete from mobile_verification where mobile_number = #{mobileNumber}
+    </delete>
+
+    <insert id="save">
+        insert into mobile_verification(mobile_number, verification_key, expired_date, verified,created_date, modified_date) values (#{mobileNumber}, #{verificationKey}, #{expiredDate}, #{verified}, #{createdDate}, #{modifiedDate})
+    </insert>
+
+    <update id="updateMobileVerificationByMobileNumber">
+        update mobile_verification set verification_key = #{verificationKey}, expired_date = #{expiredDate}, modified_date = #{modifiedDate} where mobile_number = #{mobileNumber}
+    </update>
+
+    <update id="updateMobileVerificationVerifiedByMobileNumber">
+        update mobile_verification set verified = #{verified} where mobile_number = #{mobileNumber}
+    </update>
+</mapper>

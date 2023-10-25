@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.core.repository.ApplyRepository">
+
+    <resultMap id="applyResultMap" type="Apply">
+        <result column="member_id" property="memberId" />
+        <result column="band_id" property="bandId" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+
+    <insert id="save" parameterType="Apply">
+        insert into apply(member_id,band_id ,created_date, modified_date) values (#{memberId},#{bandId}, #{createdDate}, #{modifiedDate})
+    </insert>
+
+    <select id="findById" resultMap="applyResultMap">
+        select member_id, band_id, created_date, modified_date from apply where member_id = #{memberId} and band_id = #{bandId}
+    </select>
+
+    <select id="findAllByBandId" resultMap="applyResultMap">
+        select member_id, band_id, created_date, modified_date from apply where band_id = #{bandId} order by created_date desc offset (#{pageNumber} * #{pageSize}) rows fetch next #{pageSize} rows only
+    </select>
+
+    <delete id="deleteById">
+        delete from apply where member_id = #{memberId} and band_id = #{bandId}
+    </delete>
+
+</mapper>

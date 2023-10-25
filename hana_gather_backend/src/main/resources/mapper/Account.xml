@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kopo.hanaGatherBackend.core.repository.AccountRepository">
+
+    <resultMap id="accountResultMap" type="Account">
+        <result column="account_number" property="accountNumber" />
+        <result column="created_date" property="createdDate" />
+        <result column="modified_date" property="modifiedDate" />
+    </resultMap>
+
+
+    <insert id="save">
+        insert into account(account_number, balance,created_date, modified_date) values (#{accountNumber}, #{balance}, #{createdDate}, #{modifiedDate})
+    </insert>
+
+    <select id="findById" resultMap="accountResultMap">
+        select account_number, balance, created_date, modified_date from account where account_number = #{accountNumber}
+    </select>
+
+    <update id="addBalanceByAccountNumber">
+        update account set balance = balance + #{amount} where account_number = #{accountNumber}
+    </update>
+
+
+    <update id="subBalanceByAccountNumber">
+        update account set balance = balance - #{amount} where account_number = #{accountNumber}
+    </update>
+
+
+
+
+</mapper>
