@@ -1,0 +1,17 @@
+{
+  "profile": {
+    "edit": "프로필 편집",
+    "follow": "팔로우",
+    "unfollow": "언팔로우",
+    "eFollow": "맞팔하기",
+    "block": "차단하기",
+    "posts": "게시글",
+    "following": "팔로잉",
+    "follower": "팔로워",
+    "detail": "게시글",
+    "profileImage": "프로필 이미지 설정",
+    "backgroundImage": "배경 이미지 설정",
+    "nickname": "닉네임 설정"
+  },
+  "post": {"friends": "함께한 사람"}
+}
